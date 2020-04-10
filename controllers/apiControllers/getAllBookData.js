@@ -15,7 +15,7 @@ module.exports = {
             if (err) {
                 console.log(err)
             }
-            res.send(data)
+            res.json(data)
         })
     },
 
