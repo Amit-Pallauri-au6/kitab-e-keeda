@@ -114,7 +114,9 @@ module.exports = {
             User.findOneAndUpdate({ _id : following }, { $inc : { followerCount : 1}}).exec((err, _)=>{
                 if(err) console.log(err)
             })
-            res.send("you have followed")
+            setTimeout(()=>{
+                res.send("you have followed")            
+            }, 3000)
         }catch(err){
             console.log(err)
         }
