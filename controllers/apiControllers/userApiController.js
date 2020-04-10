@@ -2,7 +2,7 @@ const User = require('../../models/users');
 const Profile = require('../../models/profile')
 const { sign } = require('jsonwebtoken');
 const uuid = require('uuid/v4')
-const { privateKey, mailPassword }= process.env 
+const { PrivateKey, mailPassword }= process.env 
 const cloudinary = require('../../fileUpload/cloudinary/cloudinary')
 const bufferToString = require('../../fileUpload/bufferToString/bufferToString')
 var otp = { userotp : 0 };
@@ -61,7 +61,7 @@ module.exports = {
         const { email, password } = req.body
         try {
             const foundUser = await User.findByEmailAndPassword(email, password);
-            sign({id : uuid} , privateKey, { expiresIn : 60*60*1 }, (err, token) => {
+            sign({id : uuid} , PrivateKey, { expiresIn : 60*60*1 }, (err, token) => {
                 if(err) return res.send(err.message);
                 foundUser.token = token 
                 foundUser.save() 
