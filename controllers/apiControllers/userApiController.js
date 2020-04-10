@@ -109,14 +109,12 @@ module.exports = {
         try{
             const { follower, following } = req.params
             User.findOneAndUpdate({ _id : follower }, { $push : { followingUser : following }}).exec((err, _)=>{
-                if(err) console.log(err)
+                if(err) res.send(err)
             })
             User.findOneAndUpdate({ _id : following }, { $inc : { followerCount : 1}}).exec((err, _)=>{
-                if(err) console.log(err)
+                if(err) res.send(err)
             })
-            setTimeout(()=>{
-                res.send("you have followed")            
-            }, 3000)
+            res.send("you have followed")
         }catch(err){
             console.log(err)
         }
