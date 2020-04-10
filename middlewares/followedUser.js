@@ -1,6 +1,6 @@
 const User = require('../models/users')
 const { verify } = require('jsonwebtoken')
-const { privateKey } = process.env
+const { PrivateKey } = process.env
 
 module.exports = {
     async followedUser(req, res, next){
@@ -12,7 +12,7 @@ module.exports = {
             if(!followerUser || !followingUser ) return res.send("invalid credentials")
             else if( !followerUser.token ) return res.send("login needed")
             else{
-                const isExpired = verify( followerUser.token, privateKey )
+                const isExpired = verify( followerUser.token, PrivateKey )
                 if(!isExpired) return res.send("token expired")
                 //verifying if the follower has already followed the user
                 const testUsers = followerUser.followingUser
