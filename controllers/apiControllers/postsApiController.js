@@ -138,7 +138,7 @@ module.exports = {
             const { comment } = req.headers
             const foundComment = await Comment.findOneAndUpdate({ _id : commentId, userId }, { comment })
             if(!foundComment) return res.status(400).send("invalid credntials")
-            res.json({ msg : "comment updated successfully ", resp })
+            res.json({ msg : "comment updated successfully ", foundComment })
         }catch(err){
             console.log(err)
         }
@@ -149,7 +149,7 @@ module.exports = {
             const { userId, commentId } = req.params
             const foundComment = await Comment.findOneAndDelete({ _id : commentId })
             if(!foundComment) return res.send("invalid credentials")
-            else if(resp !== null ) res.json({msg:"comment deleted successfully", resp})
+            else if(foundComment !== null ) res.json({msg:"comment deleted successfully", foundComment})
             else return res.status(200).send("nothing to delete")
             Thread.deleteMany({ commentId, userId }).exec((err, _)=>{
                 if(err) console.log(err)
@@ -166,7 +166,7 @@ module.exports = {
             const { thread } = req.headers
             const foundThread = await Thread.findOneAndUpdate({ _id : threadId ,userId }, { thread})
             if(!foundThread) return res.send("invalid credentials")
-            res.json({ msg: "thread updated successfully", resp })
+            res.json({ msg: "thread updated successfully", foundThread })
         }catch(err){
             console.log(err)
         }

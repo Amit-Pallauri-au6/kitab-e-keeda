@@ -8,6 +8,7 @@ module.exports = {
             _id: 0,
             "volumeInfo.title": 1,
             "volumeInfo.authors": 1,
+            "volumeInfo.categories": 1,
             "volumeInfo.imageLinks.smallThumbnail": 1,
             "volumeInfo.publishedDate": 1,
             "saleInfo.listPrice.amount": 1
