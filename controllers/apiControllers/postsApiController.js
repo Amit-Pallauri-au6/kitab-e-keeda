@@ -183,5 +183,16 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
+    },
+
+    async searchPost(req, res){
+        try {
+            const { postId }  = req.params
+            const foundPost = await Post.findOne({ _id : postId })
+            if(!foundpost) return res.send("invalid credentials")
+            res.send(foundPost)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
