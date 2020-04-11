@@ -92,16 +92,25 @@ module.exports = {
     async addProfile(req, res){
         //upload files in cloudinary
         try{
-            const { originalname, buffer } = req.file
-            const imageContent = bufferToString( originalname, buffer)
-            const { secure_url } = await cloudinary.uploader.upload(imageContent)
-            const { DOB, address, gender } = req.body
-            const user = req.params.userId
-            const userprofile = new Profile({ uploadImage : secure_url, DOB, address, gender, user })
-            await userprofile.save()  
-            res.json(userprofile)    
+            if(req.file == undefined || req.file == null){
+                const { DOB, address, gender } = req.body
+                const user = req.params.userId
+                const userprofile = new Profile({DOB, address, gender, user })
+                await userprofile.save()  
+                res.json(userprofile)             
+            }else{
+                const { originalname, buffer } = req.file
+                const imageContent = bufferToString( originalname, buffer)
+                const { secure_url } = await cloudinary.uploader.upload(imageContent)
+                const { DOB, address, gender } = req.body
+                const user = req.params.userId
+                const userprofile = new Profile({ uploadImage : secure_url, DOB, address, gender, user })
+                await userprofile.save()  
+                res.json(userprofile)             
+            }   
         }catch(err){
             console.log(err)
+            res.send(err)
         }
     },
 
