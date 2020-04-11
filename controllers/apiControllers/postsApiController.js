@@ -117,9 +117,9 @@ module.exports = {
     async deletePosts(req, res){
         try{
             const { userId, postId } = req.params
-            const foundPost = await Post.findOneAndDelete({ _id : postId, userId })
+            const foundPost = await Post.findOneAndDelete({ _id : postId, user : userId })
             if(!foundPost) return res.status(400).send("invalid credentials")
-            else if(resp !== null ) res.json({msg : "post deleted successfully", resp })
+            else if(foundPost !== null ) res.json({msg : "post deleted successfully", foundPost })
             else return res.status(200).send("nothing to delete")
             Comment.deleteMany({ postId, userId }).exec((err, _)=>{
                 if(err) console.log(err.message)
