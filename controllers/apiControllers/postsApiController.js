@@ -25,7 +25,8 @@ module.exports = {
             const { userId, postId } = req.params
             const newComment = new Comment({ comment, userId, postId })
             await newComment.save()
-            const foundPost = Post.findOneAndUpdate({ _id : postId }, { $push : { comments : newComment._id }})
+            const foundPost = await Post.findOneAndUpdate({ _id : postId }, { $push : { comments : newComment._id }})
+            console.log(foundPost)
             if(!foundPost) return res.status(400).send("invalid credentials")
             res.send(newComment)
         }catch(err){
@@ -85,16 +86,13 @@ module.exports = {
             setTimeout(() => {
                 const userPosts = []
                 followingUsers.forEach(el => {
-                    Post.find({ user: el }).exec((err, resp)=>{
-                        if(err) console.log(err) 
-                        else if(resp == []) return res.send("followed users have no posts to show")  
-                        userPosts.push(resp)
-                    })
-                });  
-                if(userPosts.length == 0) return res.send("no posts added")
-                else
+                     Post.find({ user: el }).then(doc =>{
+                         if(!doc) console.log(err)
+                         else userPosts.push(doc)                     
+                        }).catch(err => console.log(err))
+                });
                     setTimeout(()=>{
-                        res.send(userPosts)
+                        res.json(userPosts)
                     }, 2000)          
             }, 3000);
         } catch (err) {
