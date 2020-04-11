@@ -8,7 +8,7 @@ router.post('/addLikes/:userId/:postId',authenticate, addLikes)
 router.post('/addThreads/:userId/:commentId',authenticate, addThreads)
 
 router.get('/getposts/:userId',authenticate, getPosts)
-router.get('/search/:postId', searchPost)
+router.get('/searchPost/:postId', searchPost)
 
 router.put('/updatePosts/:userId/:postId', authenticate, updatePosts )
 router.put('/updateComments/:userId/:commentId', authenticate, updateComments)

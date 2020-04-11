@@ -188,9 +188,10 @@ module.exports = {
     async searchPost(req, res){
         try {
             const { postId }  = req.params
-            const foundPost = await Post.findOne({ _id : postId })
+            const foundPost = await Post.find({ _id : postId })
             if(!foundPost) return res.send("invalid credentials")
-            res.send(foundPost)
+            console.log(foundPost)
+            res.json(foundPost)
         } catch (error) {
             console.log(error)
         }
