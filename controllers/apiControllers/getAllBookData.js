@@ -5,7 +5,7 @@ module.exports = {
     async getAllBooks(req, res) {
         let page = req.query.page
         Books.find({}, {
-            _id: 0,
+            _id: 1,
             "volumeInfo.title": 1,
             "volumeInfo.authors": 1,
             "volumeInfo.categories": 1,
@@ -35,7 +35,7 @@ module.exports = {
                 var favGenreData = []
                 myGenre.forEach(ele => {
                     Books.find({ "volumeInfo.categories": ele }, {
-                        _id: 0,
+                        _id: 1,
                         "volumeInfo.title": 1,
                         "volumeInfo.categories": 1,
                         "volumeInfo.imageLinks.smallThumbnail": 1,
@@ -95,7 +95,7 @@ module.exports = {
                 myTitle.forEach(ele => {
                     Books.find({
                         "volumeInfo.title": ele }, {
-                        _id: 0,
+                        _id: 1,
                         "volumeInfo.title": 1,
                         "volumeInfo.authors": 1,
                         "volumeInfo.imageLinks.smallThumbnail": 1,
