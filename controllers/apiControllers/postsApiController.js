@@ -91,9 +91,11 @@ module.exports = {
                         userPosts.push(resp)
                     })
                 });  
-                setTimeout(()=>{
-                    res.send(userPosts)
-                }, 2000)          
+                if(userPosts.length == 0) return res.send("no posts added")
+                else
+                    setTimeout(()=>{
+                        res.send(userPosts)
+                    }, 2000)          
             }, 3000);
         } catch (err) {
             console.log(err)
