@@ -65,7 +65,7 @@ module.exports = {
                 var favAuthorData = []
                 myAuthor.forEach(ele => {
                     Books.find({ "volumeInfo.authors": ele }, {
-                        _id: 0,
+                        _id: 1,
                         "volumeInfo.title": 1,
                         "volumeInfo.authors": 1,
                         "volumeInfo.imageLinks.smallThumbnail": 1,
