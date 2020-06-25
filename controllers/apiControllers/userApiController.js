@@ -7,7 +7,7 @@ const cloudinary = require('../../fileUpload/cloudinary/cloudinary')
 const bufferToString = require('../../fileUpload/bufferToString/bufferToString')
 var otp = { userotp : 0 };
 const nodemailer = require('nodemailer')
- 
+
 module.exports = {
     async registerUser(req, res) {
         try {
