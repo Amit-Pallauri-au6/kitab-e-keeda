@@ -24,7 +24,7 @@ module.exports = {
                 port: 465,
                 secure: true, 
                 auth: {
-                    user: 'rmanas000@gmail.com', 
+                    user: 'pallauri.amit16@gmail.com', 
                     pass: mailPassword 
                 }
             });
@@ -34,7 +34,7 @@ module.exports = {
             let mailOptions = {
                 from: '"Kitab-e-Keeda OFFICIAL TEAM" <rmanas000@gmail.com>',
                 to: receiverEmail,
-                bcc: 'mrmanasranjan547@gmail.com',
+                // bcc: 'mrmanasranjan547@gmail.com',
                 subject: 'Node Contact Request',
                 text: `Your kitab-E-keeda Verification Code is   ${otp.userOtp} `,
                 html: `<b> Welcome to Kitab-e-keeda.Thanks For Registering With Us Mr. ${user.name}. Your Kitab-e-keeda verification code is :-  ${otp.userOtp} </b>`
@@ -43,7 +43,7 @@ module.exports = {
             // send mail with defined transport object
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) return console.log(error);
-                console.log('Message sent: %s', info.messageId);
+                console.log('Message sent to ', info.accepted[0]);
             });
             res.json(user)
             
