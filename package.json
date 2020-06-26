@@ -2,7 +2,7 @@
   "name": "Kitab-E-Keeda",
   "version": "1.0.0",
   "description": "Project done by Manas and Amit Pallauri",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
